@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Define environment variables
         GIT_REPO_URL = 'https://github.com/Lakshma12/NODE-JS.git'  // Repository URL
-        BRANCH_NAME = 'main'  // Replace with the branch you want to clone
+        BRANCH_NAME = 'main'  // Branch to clone
     }
 
     stages {
@@ -15,7 +15,23 @@ pipeline {
             }
         }
         
-        // Add other stages like build, test, or deploy if needed
+        stage('Install Dependencies') {
+            steps {
+                // If you have a package.json, install dependencies
+                script {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Node.js Script') {
+            steps {
+                // Run the Node.js app.js script
+                script {
+                    sh 'node app.js'  // Running app.js script
+                }
+            }
+        }
     }
 
     post {
